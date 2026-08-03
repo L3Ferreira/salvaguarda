@@ -41,6 +41,11 @@ decisões não triviais na resposta (regra pedagógica deste projeto, ver
 - Exceções de domínio tratadas explicitamente (ex.: middleware de exceção
   na Api mapeando para status HTTP); não deixe exceção genérica vazar sem
   tratamento.
+- Nomenclatura em PT-BR para entidades/enums de domínio, sufixo técnico em
+  inglês para repositório/serviço/DTO/controller (ver `AGENTS.md`, seção
+  "Convenção de nomenclatura (idioma)") — não escreva `Order`/`Product`
+  quando o domínio é em português, a menos que o `techlead` documente
+  exceção.
 
 ## Auth (padrão a menos que o techlead documente outra decisão)
 

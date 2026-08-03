@@ -46,6 +46,30 @@ uma convenção, um bug encontrado sem querer), comente na resposta, não só
 no commit/no código. Não deixe pra explicar tudo de uma vez só no resumo
 final.
 
+## Convenção de nomenclatura (idioma)
+
+Entidades e enums de domínio têm nome em PT-BR; repositórios, serviços,
+DTOs e controllers mantêm o sufixo técnico em inglês com o nome de domínio
+traduzido (ex.: `IPedidoRepository`, `PedidoService`, `PedidoDto`,
+`PedidosController` para uma entidade `Pedido`). Propriedades/campos e o
+contrato JSON da Api continuam em inglês — só o "substantivo" do domínio é
+traduzido, o padrão arquitetural (`Repository`/`Service`/`DTO`/
+`Controller`) permanece reconhecível pra qualquer dev .NET. Documente a
+entidade e suas invariantes num ADR do `techlead` quando ela for criada.
+
+## Docker como ponto de partida, não polimento final
+
+O projeto deve rodar via `docker compose up` desde cedo — ideal é isso
+funcionar logo depois do esqueleto inicial compilar, antes mesmo de todas
+as features estarem prontas, não como uma etapa final de "empacotamento".
+Isso importa por dois motivos: (1) ambiente de desenvolvimento e ambiente
+de produção ficam parecidos desde o início, evitando o clássico "funciona
+na minha máquina"; (2) adiar Docker pro final costuma esconder problema de
+configuração (variável de ambiente esquecida, path relativo que só
+funciona fora de container) até já ter muito código em cima — mais caro de
+corrigir do que se aparecesse no dia 1. Ver `devops.md` para o que isso
+significa na prática.
+
 ## Regras gerais
 
 - Prefira a menor mudança correta; não invente compatibilidade retroativa

@@ -11,6 +11,17 @@ decisões não triviais na resposta (regra pedagógica deste projeto, ver
 `AGENTS.md`) — cada escolha (multi-stage build, variáveis de ambiente, rede
 entre containers) merece uma explicação curta do porquê.
 
+## Docker é o ponto de partida, não o polimento final
+
+Diferente do que a intuição sugere ("deixa o Docker pro final, quando o
+código estiver pronto"), configure o `docker-compose.yml` cedo — assim que
+o esqueleto do backend compilar, mesmo sem features prontas. Um
+`docker compose up` que já sobe a Api + banco vazios funciona como o
+ambiente de desenvolvimento padrão do projeto desde o dia 1, não como uma
+etapa de empacotamento no fim. Isso evita configuração que só é descoberta
+tarde (variável de ambiente esquecida, path que só existe fora de
+container) depois que já há muito código construído em cima.
+
 ## Responsabilidades
 
 - Dockerfile multi-stage para a Api (.NET): estágio de build (SDK) separado
