@@ -32,6 +32,16 @@ entre containers) merece uma explicação curta do porquê.
 - Healthcheck no serviço de banco antes da Api depender dele no compose,
   quando fizer diferença prática para o `docker compose up` funcionar de
   primeira.
+- Se a Api tiver CORS restrito por origem (comum com um SPA em dev), a
+  lista de origins permitidas deve cobrir `http://localhost:<porta>` **e**
+  `http://127.0.0.1:<porta>` juntos, não só um dos dois. Para o navegador
+  são origens diferentes mesmo apontando pra mesma máquina; se só uma
+  estiver liberada, acessar o app pela outra faz o navegador bloquear a
+  resposta por CORS, e isso costuma aparecer no frontend como um erro
+  genérico de "não foi possível conectar" (a rejeição do `fetch` por CORS
+  não carrega detalhe do motivo) — parece Api fora do ar, mas não é.
+  Diagnóstico: no DevTools, comparar o `Origin`/`Referer` da requisição
+  falha com o que está de fato liberado na configuração de CORS.
 
 ## Limites
 
