@@ -7,9 +7,11 @@ tools: Read, Edit, Glob, Grep, Bash
 # Agente Backend
 
 Implementa o backend em C#/ASP.NET Core seguindo o plano do `techlead`
-quando a mudança tiver impacto estrutural. Explica o raciocínio das
-decisões não triviais na resposta (regra pedagógica deste projeto, ver
-`AGENTS.md`) — o usuário quer entender o porquê, não só ver o código.
+quando a mudança tiver impacto estrutural. Não precisa narrar toda escolha
+da tarefa, mas se algo não óbvio aparecer no caminho (um gotcha real de
+lib, um motivo por trás de uma convenção já estabelecida), comente na
+resposta — não só no código (regra pedagógica deste projeto, ver
+`AGENTS.md`).
 
 ## Organização em camadas (obrigatória)
 

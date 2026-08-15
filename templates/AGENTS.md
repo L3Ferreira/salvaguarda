@@ -13,10 +13,28 @@ Este projeto usa subagentes do Claude Code por especialidade, definidos em
 - `frontend` — implementa Angular/TypeScript (Signals, Tailwind, spartan/ui,
   Reactive Forms + Zod).
 - `devops` — Dockerfile, docker-compose, variáveis de ambiente, execução.
-- `testes` — testes xUnit (unitários e integração) e estratégia de testes.
+- `testes` — testes e estratégia de testes, no escopo definido abaixo
+  (xUnit no backend, Jasmine/Karma no frontend, conforme aplicável).
 
 Sem `orquestrador` dedicado: sem delegação explícita, a própria thread
 principal já atua como orquestrador e segue este fluxo diretamente.
+
+Nenhum desses agentes é uma instância única/singleton — são papéis
+(templates de prompt), não processos persistentes. Nada impede delegar o
+**mesmo agente mais de uma vez em paralelo** quando as tarefas são
+independentes entre si (ex.: dois endpoints de backend sem dependência um
+do outro, ou back e front da mesma feature ao mesmo tempo já com o
+contrato de Api combinado). Só serialize quando há dependência real (ex.:
+o endpoint B usa uma entidade que o endpoint A ainda vai criar) — não por
+achar que "só existe 1 `backend`".
+
+## Escopo de testes deste projeto
+
+`<preencher na criação do projeto — ver salvaguarda/README.md, "Como criar
+um projeto novo">`: **backend** | **frontend** | **full** | **nenhum**.
+
+Se "nenhum", o agente `testes` não deveria estar presente em
+`.claude/agents/` neste projeto.
 
 ## Fluxo obrigatório
 
@@ -24,26 +42,39 @@ principal já atua como orquestrador e segue este fluxo diretamente.
 2. Para mudanças estruturais (nova entidade, novo padrão, decisão de
    arquitetura, trade-off relevante), delegar primeiro ao `techlead`.
 3. Para implementação já decidida, delegar direto a `backend`, `frontend`,
-   `devops` ou `testes`, conforme a camada.
-4. Nenhuma implementação é aceita sem teste proporcional ao risco.
+   `devops` ou `testes`, conforme a camada — em paralelo quando as tarefas
+   forem independentes (ver nota acima).
+4. Nenhuma implementação é aceita sem teste proporcional ao risco e ao
+   escopo de testes definido acima.
 5. Revisão de código usa as skills nativas `/code-review` e `/simplify` —
    não há agente `revisor` dedicado (escopo pequeno demais para justificar).
 
-## Regra pedagógica (obrigatória para todos os agentes)
+## Regra pedagógica
 
 O objetivo deste projeto não é só entregar código — é o usuário aprender as
-tecnologias e as decisões por trás delas. Por isso, **todo agente deve
-explicar o raciocínio e os trade-offs das decisões não triviais que
-tomar**, diretamente na resposta (não só código): por que essa abordagem e
-não outra, quais alternativas existiam, o que se perde e o que se ganha.
-Prefira explicações curtas e concretas (2-5 frases) ancoradas no código que
-acabou de escrever, em vez de teoria solta.
+tecnologias e as decisões por trás delas. Mas o peso dessa regra varia por
+agente, não é uniforme:
 
-Isso vale mesmo em tarefas que parecem "só mecânicas" (renomear, mover
-arquivo, ajustar config) — se algo interessante ou não óbvio aparecer no
-caminho (um comportamento inesperado de uma lib, um motivo real por trás de
-uma convenção, um bug encontrado sem querer), comente na resposta, não só
-no commit/no código. Não deixe pra explicar tudo de uma vez só no resumo
+- **`techlead` — obrigatória e é o entregável em si**: toda decisão
+  arquitetural vem com alternativas reais consideradas, critério de
+  escolha explícito e trade-off (o que se ganha, o que se perde), tanto no
+  ADR quanto na resposta ao usuário. Não é opcional aqui — é o motivo do
+  agente existir.
+- **`backend`, `frontend`, `devops`, `testes` (agentes de implementação) —
+  leve, por exceção, não por obrigação genérica**: não pare a execução pra
+  narrar toda escolha da tarefa (isso tende a virar ruído que o próprio
+  agente aprende a ignorar sob pressão de terminar a tarefa concreta). Mas
+  se algo realmente saltar aos olhos no caminho — um comportamento
+  inesperado de lib, um motivo não óbvio por trás de uma convenção já
+  estabelecida, um bug encontrado sem querer — comente na resposta, não só
+  no código/commit. Um agente de implementação pode ter uma razão
+  project-specific pra pesar mais essa regra (ex.: o `frontend.md` deste
+  projeto, porque o usuário está aprendendo Angular do zero) — quando isso
+  acontecer, fica documentado no `.md` do próprio agente, não aqui.
+
+Quando qualquer agente explicar algo, prefira explicações curtas e
+concretas (2-5 frases) ancoradas no código que acabou de escrever, em vez
+de teoria solta. Não deixe pra explicar tudo de uma vez só no resumo
 final.
 
 ## Convenção de nomenclatura (idioma)

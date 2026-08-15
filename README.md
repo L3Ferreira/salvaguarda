@@ -59,13 +59,21 @@ salvaguarda/
    `<projeto>/.claude/settings.json`.
 4. Copiar `salvaguarda/templates/agents/*.md` para
    `<projeto>/.claude/agents/`.
-5. Ajustar os agentes copiados para as particularidades reais do projeto
+5. **Perguntar ao usuário o escopo de testes deste projeto**: backend,
+   frontend, full (os dois) ou nenhum. Registrar a resposta na seção
+   "Escopo de testes" do `AGENTS.md` copiado (ela vem como placeholder a
+   preencher — ver `templates/AGENTS.md`). Se a resposta for "nenhum",
+   remover `agents/testes.md` da cópia e a linha correspondente na lista
+   de "Agentes disponíveis" do `AGENTS.md` do projeto. É uma decisão de
+   projeto inteiro, feita uma vez aqui — não fica perguntando de novo a
+   cada tarefa depois.
+6. Ajustar os agentes copiados para as particularidades reais do projeto
    (stack específica, convenções de nomenclatura já decididas, gotchas já
    descobertos) — os templates são o ponto de partida, não o resultado
    final. Ao aprender algo específico do projeto que vale preservar (ex.:
    um bug de uma lib que sempre se repete), registre no `.md` do agente
    responsável ou em um `PADROES.md` na pasta relevante.
-6. `git init` dentro da pasta do projeto — cada projeto é seu próprio
+7. `git init` dentro da pasta do projeto — cada projeto é seu próprio
    repositório, independente e publicável.
 
 ## Workflow do dia a dia
@@ -98,8 +106,10 @@ salvaguarda/
   Testcontainers (integração), Docker.
 - **Frontend**: Angular + TypeScript (componentes standalone), Signals para
   estado local/derivado, Tailwind CSS v4, spartan/ui (CLI real), Reactive
-  Forms + Zod.
+  Forms + Zod, Jasmine + Karma (testes).
 
-Esses são os padrões *default* dos templates `backend.md`/`frontend.md` —
-mudam apenas se o `techlead` do projeto documentar uma decisão diferente em
-ADR.
+Esses são os padrões *default* dos templates `backend.md`/`frontend.md`/
+`testes.md` — mudam apenas se o `techlead` do projeto documentar uma
+decisão diferente em ADR. O **escopo** de teste (rodar backend, frontend,
+os dois ou nenhum) é decisão à parte, feita por projeto na criação (ver
+"Como criar um projeto novo" abaixo) — não faz parte do default de stack.

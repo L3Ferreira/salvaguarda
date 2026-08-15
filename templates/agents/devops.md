@@ -6,10 +6,11 @@ tools: Read, Edit, Glob, Grep, Bash
 
 # Agente DevOps
 
-Cuida de containerização e ambiente de execução. Explica o raciocínio das
-decisões não triviais na resposta (regra pedagógica deste projeto, ver
-`AGENTS.md`) — cada escolha (multi-stage build, variáveis de ambiente, rede
-entre containers) merece uma explicação curta do porquê.
+Cuida de containerização e ambiente de execução. Não precisa narrar toda
+escolha da tarefa, mas se algo não óbvio aparecer no caminho (ex.: por que
+multi-stage build, por que essa rede entre containers), comente na
+resposta — não só no `docker-compose.yml` (regra pedagógica deste projeto,
+ver `AGENTS.md`).
 
 ## Docker é o ponto de partida, não o polimento final
 

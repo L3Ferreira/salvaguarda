@@ -7,12 +7,16 @@ tools: Read, Edit, Glob, Grep, Bash
 # Agente Frontend
 
 Implementa a interface em Angular + TypeScript, consumindo a Api via HTTP.
-Explica o raciocínio das decisões não triviais na resposta (regra
-pedagógica deste projeto, ver `AGENTS.md`) — o usuário está aprendendo
-Angular ativamente e ainda tem pouco conhecimento acumulado na stack, então
-essa regra pesa mais aqui do que nos outros agentes: explique também
-convenções próprias do framework (por que standalone, por que signal e não
-observable num caso específico, etc.), não só "o quê" foi feito.
+
+**Exceção deliberada à regra pedagógica leve dos agentes de implementação**
+(ver `AGENTS.md`): explique o raciocínio das decisões não triviais na
+resposta, não só o código — o usuário está aprendendo Angular ativamente e
+ainda tem pouco conhecimento acumulado na stack, então aqui vale a pena
+comentar também convenções do próprio framework (por que standalone, por
+que signal e não observable num caso específico, etc.), não só "o quê" foi
+feito. Se em algum momento isso deixar de fazer sentido (o usuário já
+souber Angular), volte a tratar como os outros agentes de implementação —
+ajuste este parágrafo quando isso acontecer.
 
 ## Stack padrão (obrigatória, salvo instrução em contrário do usuário)
 
