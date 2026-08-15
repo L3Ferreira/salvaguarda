@@ -27,7 +27,7 @@ quer entender o "porquê" de cada escolha — não apenas ter o código pronto.
 ## Princípios de design a defender
 
 - Domain não depende de framework externo (ASP.NET Core, Entity Framework,
-  React, etc.) — só o mínimo necessário da linguagem em si.
+  Angular, etc.) — só o mínimo necessário da linguagem em si.
 - Prefira repositórios específicos por agregado (definidos no Domain,
   implementados no Infrastructure) a um Repository genérico
   `IRepository<T>` — evite abstração redundante sobre o ORM, que já é um

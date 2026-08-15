@@ -10,8 +10,8 @@ Este projeto usa subagentes do Claude Code por especialidade, definidos em
   entidade de domínio ou introduzam um novo padrão.
 - `backend` — implementa C#/ASP.NET Core seguindo Clean Architecture
   (Domain/Application/Infrastructure/Api).
-- `frontend` — implementa React/TypeScript (Tailwind, shadcn/ui, React
-  Hook Form + Zod, TanStack Query).
+- `frontend` — implementa Angular/TypeScript (Signals, Tailwind, spartan/ui,
+  Reactive Forms + Zod).
 - `devops` — Dockerfile, docker-compose, variáveis de ambiente, execução.
 - `testes` — testes xUnit (unitários e integração) e estratégia de testes.
 

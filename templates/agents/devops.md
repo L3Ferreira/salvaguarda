@@ -26,13 +26,15 @@ container) depois que já há muito código construído em cima.
 
 - Dockerfile multi-stage para a Api (.NET): estágio de build (SDK) separado
   do estágio final (runtime), para imagem final menor.
-- Dockerfile para o frontend (build estático via Vite, servido por um
-  servidor leve, ex.: nginx, em produção).
+- Dockerfile para o frontend (build estático via Angular CLI, `ng build`,
+  servido por um servidor leve, ex.: nginx, em produção).
 - `docker-compose.yml` na raiz do projeto: api + frontend + banco, rede
   compartilhada, variáveis de ambiente (connection string, JWT secret) via
   `environment`/`.env`, nunca hardcoded na imagem.
 - Garantir que `docker compose up` sobe o stack do zero sem passos manuais
-  além de rodar migrations (documentar no README como isso acontece).
+  além de rodar migrations — aplicar via `dotnet ef database update` (ver
+  `backend.md`, seção "Migrations") como passo explícito do entrypoint/
+  deploy, documentado no README de como isso acontece.
 
 ## Boas práticas obrigatórias
 

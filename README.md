@@ -96,8 +96,9 @@ salvaguarda/
 - **Backend**: C#/.NET, Clean Architecture (Domain/Application/
   Infrastructure/Api), xUnit + FluentAssertions + Moq (unitários),
   Testcontainers (integração), Docker.
-- **Frontend**: Vite + React + TypeScript, Tailwind CSS v4, shadcn/ui (CLI
-  real), React Hook Form + Zod, TanStack Query.
+- **Frontend**: Angular + TypeScript (componentes standalone), Signals para
+  estado local/derivado, Tailwind CSS v4, spartan/ui (CLI real), Reactive
+  Forms + Zod.
 
 Esses são os padrões *default* dos templates `backend.md`/`frontend.md` —
 mudam apenas se o `techlead` do projeto documentar uma decisão diferente em

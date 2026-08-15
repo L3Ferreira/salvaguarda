@@ -56,6 +56,29 @@ Infrastructure). Não usar ASP.NET Core Identity por padrão — só se o
 projeto precisar de recursos que o Identity resolve de fábrica (login
 externo, 2FA, etc.) e isso for decidido explicitamente com o `techlead`.
 
+## Migrations (EF Core)
+
+Migrations são geradas e aplicadas via CLI `dotnet ef`, nunca escritas à
+mão nem aplicadas via `EnsureCreated()`:
+
+- `dotnet ef migrations add <Nome>` depois de qualquer mudança de
+  entidade/mapeamento que afete o schema (nova propriedade, nova entidade,
+  mudança de relacionamento). Nome descreve a mudança (ex.:
+  `AddPedidoStatusColumn`), nunca genérico (`Update1`).
+- `dotnet ef database update` aplica as migrations pendentes no banco
+  local durante o desenvolvimento.
+- Se o `DbContext` mora em `Infrastructure` (o padrão deste template) e o
+  projeto de startup é `Api`, rode com `--project`/`--startup-project`
+  explícitos: `dotnet ef migrations add <Nome> --project Infrastructure --startup-project Api`.
+- Revise o arquivo de migration gerado antes de commitar — `dotnet ef`
+  erra silenciosamente em cenários como rename de coluna (gera drop+add em
+  vez de rename), o que perde dado em produção se aplicado sem revisão.
+- Nunca edite um arquivo de migration já commitado/aplicado em outro
+  ambiente; gere uma nova migration corretiva em vez disso.
+- Em produção, aplicar migration é um passo explícito do deploy (ver
+  `devops.md`) — não `EnsureCreated()` nem migration automática silenciosa
+  no startup da Api sem log/controle.
+
 ## Limites
 
 Não delegue a outros agentes — implemente diretamente, ou devolva ao
